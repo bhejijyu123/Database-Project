@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Login</title>
+</head>
+      <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f2f2f2;
+      }
+
+      .login-box {
+        width: 300px;
+        margin: 100px auto;
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 0 20px #000;
+      }
+
+      .login-box h2 {
+        text-align: center;
+        color: #000;
+        font-size: 24px;
+        margin-bottom: 20px;
+      }
+
+      .login-box input[type="text"],
+      .login-box input[type="password"] {
+        width: 100%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+
+      .login-box #login {
+        background-color: #4CAF50;
+        color: #fff;
+        padding: 14px 20px;
+        margin-top: 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      .login-box #login:hover {
+        background-color: #45a049;
+      }
+    </style>
+<body>
+	{% if error %}
+		<p style="color: red">{{ error }}</p>
+	{% endif %}
+	<!-- <form  method="POST">
+		<label>Username:</label><br>
+		<input type="text" name="username" required><br>
+		<label>Password:</label><br>
+		<input type="password" name="password" required><br>
+		<input type="submit" value="Login">
+	</form> -->
+  <div class="login-box">
+      <h2>Login</h2>
+      <form method="POST">
+        <label for="username">Username:</label>
+        <br>
+        <input type="text" id="username" name="username" required>
+        <br>
+        <label for="password">Password:</label>
+        <br>
+        <input type="password" id="password" name="password" required>
+        <br>
+        <input type="submit" value="Login" id="login">
+      </form>
+    </div>
+</body>
+</html>

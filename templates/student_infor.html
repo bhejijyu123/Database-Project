@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>University of Kathmandu</title>
+  <style>
+/* Reset styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Basic styles */
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+header {
+  background-color: #8D8741;
+  color: #fff;
+  padding: 20px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 36px;
+  text-align: center;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav li {
+  margin: 0;
+}
+
+nav a {
+  display: block;
+  padding: 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+nav a:hover {
+  background-color: #659DBD;
+  color: #fff;
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 28px;
+  margin-top: 20px;
+  color: #BC986A;
+}
+
+p {
+  margin-bottom: 20px;
+  color: #444;
+}
+
+a {
+  color: #659DBD;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #DAAD86;
+}
+
+footer {
+  background-color: #FBEEC1;
+  color: #333;
+  padding: 20px;
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* Media queries */
+@media screen and (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  nav li {
+    margin: 10px 0;
+  }
+}
+
+        .card-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .card {
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        height: 500px;
+        justify-content: space-between;
+        margin: 20px;
+        padding: 20px;
+        width: 300px;
+      }
+      .card h2 {
+        font-size: 24px;
+        margin: 0;
+      }
+      .card p {
+        font-size: 16px;
+        margin: 10px 0;
+      }
+      .card span {
+        font-weight: bold;
+      }
+  </style>
+</head>
+<body>
+	<header>
+		<h1>University of Kathmandu</h1>
+		<nav>
+			<ul>
+				<li><a href="/">Home</a></li>
+				<li><a href="/staffs">Staff Directory</a></li>
+				<li><a href="/courses">Courses </a></li>
+ 				<li><a href="/login">Student Profile</a></li>
+				<li><a href="/contact">Contact Us</a></li>
+        <li><a href="/login">Add Student</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+
+  
+  
+      {% for course in courses %}
+
+<div display: flex>
+
+<div> <H2>Welcome to Course planning <p> {{ course[6] }}</p> </H2> </div> 
+ 
+
+  <div> <img src = https://i.pinimg.com/originals/ae/24/87/ae24874dd301843548c034a3d2973658.png width="250" height="250" ></div>
+  <style>
+    
+img {
+  border-radius: 50%;
+}
+    </style>
+
+        
+
+  </div>
+<br><br><br>
+
+        <hr>
+        <div class="card-container">
+          <div class="card">
+            
+          <p><span>ID:</span> {{ course[0] }}</p> </H2>
+          <p><span>Email:</span> {{ course[7] }}</p> </H2>
+          <p><span>Major:</span> {{ course[9] }}</p> </H2>
+
+          <br>
+          <H3> ---Classes Enrolled---</H3>
+          <p><span>Course 1:</span> {{ course[1] }}</p>
+          <p><span>Course 2:</span> {{ course[2] }}</p>
+          <p><span>Course 3:</span> {{ course[3] }}</p>
+          <p><span>Course 4:</span> {{ course[4] }}</p>
+        </div>
+      {% endfor %}
+
+          
+      {% for course in professor %}
+
+        <div class="card-container">
+          <div class="card">
+            
+          <p><span>Advisor :</span> {{ course[1] }}</p> </H2>
+          <p><span>Email:</span> {{ course[2] }}</p> </H2>
+          <p><span>Phone:</span> {{ course[3] }}</p> </H2>
+            <p><span>Address:</span> {{ course[4] }}</p> </H2>
+
+
+        </div>
+      {% endfor %}
+    </div>
+<hr>
+
+<style>
+    .form-container {
+        line-height: 2;
+        margin-bottom: 50px;
+    }
+
+    .delete-container 
+
+        line-height: 1.5;
+    }
+</style>
+
+
+
+          
+<div class="form-container" >
+    <h1>Make Changes Below To Change Class</h1>
+
+    <form action="{{ url_for('process_form') }}" method="post">
+        <label for="course">Select a course:</label>
+        <input type="text" id="numCourse" name="numCourse"><br><br>
+
+        <label for="course">New Course To Replace:</label>
+        <input type="text" id="newCourse" name="newCourse"><br><br>
+
+        <label for="course">ID:</label>
+        <input type="text" id="username" name="username"><br><br>
+
+        <input type="submit" value="Submit">
+    </form>
+</div>
+
+<div class="delete-container" style="margin-left: 20px;">
+    <h3>DO YOU WANT TO DELETE YOUR PROFILE?</h3>
+
+    <form action="{{ url_for('delete_form') }}" method="post">
+        <label for="id">USER ID:</label>
+        <input type="text" id="id" name="id"><br><br>
+
+        <label for="course">Password:</label>
+        <input type="text" id="pw" name="pw"><br><br>
+
+        <input type="submit" value="Delete">
+    </form>
+</div>
+
+	</main>
+ 
+	<footer>
+		<p>&copy; 2023 University of Kathmandu. All rights reserved.</p>
+	</footer>
+</body>
+</html>

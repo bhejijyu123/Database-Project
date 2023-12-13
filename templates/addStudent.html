@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>University of Kathmandu</title>
+  <style>
+/* Reset styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Basic styles */
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+header {
+  background-color: #8D8741;
+  color: #fff;
+  padding: 20px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 36px;
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+nav li {
+  margin: 0;
+}
+
+nav a {
+  display: block;
+  padding: 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+nav a:hover {
+  background-color: #659DBD;
+  color: #fff;
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 28px;
+  margin-top: 20px;
+  color: #BC986A;
+}
+
+p {
+  margin-bottom: 20px;
+  color: #444;
+}
+
+a {
+  color: #659DBD;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #DAAD86;
+}
+
+footer {
+  background-color: #FBEEC1;
+  color: #333;
+  padding: 20px;
+  text-align: center;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* Media queries */
+@media screen and (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  nav li {
+    margin: 10px 0;
+  }
+}
+
+    body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  background-color: #FBEEC1;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+
+ 
+  </style>
+</head>
+<body>
+	<header>
+		<h1>University of Kathmandu</h1>
+		<nav>
+			<ul>
+				<li><a href="/">Home</a></li>
+				<li><a href="/staffs">Staff Directory</a></li>
+				<li><a href="/courses">Courses </a></li>
+ 				<li><a href="/login">Student Profile</a></li>
+				<li><a href="/contact">Contact Us</a></li>
+        <li><a href="/login">Add Student</a></li>
+			</ul>
+		</nav>
+	</header>
+	<main>
+  <h1>Student Information Form</h1>
+    
+  <form action="{{ url_for('addNewStudent') }}" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    
+    <label for="pronouns">Pronouns:</label>
+    <input type="text" id="pronouns" name="pronouns" required>
+    
+    <label for="intended_major">Intended Major:</label>
+<select id="intended_major" name="intended_major" onchange="populateClasses()" required>
+    <option value="Biology">Biology</option>
+    <option value="Computer Science">Computer Science</option>
+    <option value="Business">Business</option>
+    <option value="Engineering">Engineering</option>
+    <option value="Psychology">Psychology</option>
+</select>
+
+<label for="class1">Class 1:</label>
+<select id="class1" name="class1">
+    <option value="">Select a class</option>
+</select>
+
+<label for="class2">Class 2:</label>
+<select id="class2" name="class2">
+    <option value="">Select a class</option>
+</select>
+
+<label for="class3">Class 3:</label>
+<select id="class3" name="class3">
+    <option value="">Select a class</option>
+</select>
+
+<label for="class4">Class 4:</label>
+<select id="class4" name="class4">
+    <option value="">Select a class</option>
+</select>
+
+<script>
+    var classData = {
+        'Computer Science': ['CSC 101', 'CSC 201', 'CSC 202', 'CSC 310', 'CSC 340', 'CSC 411', 'CSC 415'],
+        'Psychology': ['PSY 101', 'PSY 201', 'PSY 202', 'PSY 301', 'PSY 302', 'PSY 401', 'PSY 402'],
+        'Business': ['BUS 101', 'BUS 201', 'BUS 202', 'BUS 301', 'BUS 302', 'BUS 401', 'BUS 402'],
+        'Engineering': ['ENG 100', 'ENG 200', 'ENG 300', 'ENG 400', 'ENG 450', 'ENG 500', 'ENG 550'],
+        'Biology': ['BIOL 101', 'BIOL 202', 'BIOL 301', 'BIOL 302', 'BIOL 401', 'BIOL 402', 'BIOL 501']
+    };
+
+    function populateClasses() {
+        var subjectDropdown = document.getElementById('intended_major');
+        var classDropdowns = document.querySelectorAll('[id^="class"]');
+        var selectedSubject = subjectDropdown.value;
+
+        // Clear existing options
+        for (var i = 0; i < classDropdowns.length; i++) {
+            var classDropdown = classDropdowns[i];
+            classDropdown.innerHTML = '<option value="">Select a class</option>';
+        }
+
+        if (selectedSubject) {
+            var classes = classData[selectedSubject];
+
+            // Add options based on the selected subject
+            for (var j = 0; j < classes.length; j++) {
+                var option = document.createElement('option');
+                option.value = classes[j];
+                option.text = classes[j];
+                for (var k = 0; k < classDropdowns.length; k++) {
+                    var classDropdown = classDropdowns[k];
+                    classDropdown.appendChild(option.cloneNode(true));
+                }
+            }
+        }
+    }
+</script>
+
+
+
+
+    <label for="school_year">School Year:</label>
+    <select id="school_year" name="school_year" value="" required>
+      <option value="Freshman">Freshman</option>
+      <option value="Sophomore">Sophomore</option>
+      <option value="Junior">Junior</option>
+      <option value="Senior">Senior</option>
+    </select>
+    
+    <input type="submit" value="Submit">
+  </form>
+	</main>
+	<footer>
+		<p>&copy; 2023 University of Kathmandu. All rights reserved.</p>
+	</footer>
+</body>
+</html>
